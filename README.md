@@ -47,7 +47,7 @@ A production-grade, zero-infrastructure e-commerce ordering engine and real-time
 ### 📦 Operational Fulfillment Interface
 
 <div align="center">
-  <h4>Packaging Team Reactive Dashboard (`?view=worker`)</h4>
+  <h4>Packaging Team Dashboard (`?view=worker`)</h4>
   <p align="center">Live feed panel tracking pending lists with integrated click-to-call links and automated financial rollback mechanics.</p>
   <img src="Images/Worker.png" alt="Worker Packaging Dashboard" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
 </div>
