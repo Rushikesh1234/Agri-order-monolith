@@ -53,3 +53,23 @@ A production-grade, zero-infrastructure e-commerce ordering engine and real-time
 </div>
 
 ---
+
+### 🗃️ Backend Relational Database (Google Sheets Architecture)
+
+<div align="center">
+  <h4>Live Ledger & Multi-Tab Data Model Architecture</h4>
+  <p align="center">A 3-tab relational schema acting as an asynchronous datastore for real-time inventory adjustments and ledger balance sheets.</p>
+  <img src="Images/Sheet-1.png" alt="Google Sheets Multi-Tab Database Architecture" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
+</div>
+
+#### 📋 Database Tab Schema Breakdown:
+
+1. **`Inventory` (Master Catalog Tab):**
+   * Acts as the single source of truth for items.
+   * Stores Category, Item Name, Base Price, Unit Type, and Configuration Types (`By Count` vs. `By Weight`) to dynamically build the frontend DOM.
+
+2. **`Orders` (Transactional Ledger Tab):**
+   * Appends inbound payloads asynchronously with timestamps, unique customer strings, nested shopping lists, total financial math, and live status strings (`Pending`, `Packed`, or `Cancelled`).
+
+3. **`ItemSalesSummary` (Aggregated Analytics Tab):**
+   * A reactive analytical view updated live via our transactional state rollback scripts. It aggregates total metric volumes sold alongside real-time gross revenue breakdowns for every individual product line.
