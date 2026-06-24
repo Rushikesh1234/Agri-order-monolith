@@ -27,19 +27,19 @@ A production-grade, zero-infrastructure e-commerce ordering engine and real-time
 <div align="center">
   <h4>Step 1: Customer Details & Smart Catalog Selection</h4>
   <p align="center">Features dynamic inventory grouping by category and input masking for telephone validation.</p>
-  <img src="Images/Index.png" alt="Customer Form Step 1 - Catalog Selection" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
+  <img src="Images/Index v2.png" alt="Customer Form Step 1 - Catalog Selection" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
   
   <br/><br/>
   
   <h4>Step 2: Real-Time Order Verification & Price Review</h4>
   <p align="center">Shows live itemized pricing tallies, unit conversions, and calculated grand totals before submission.</p>
-  <img src="Images/Index Page 2.png" alt="Customer Form Step 2 - Order Review" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
+  <img src="Images/Index Page 2 v2.png" alt="Customer Form Step 2 - Order Review" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
   
   <br/><br/>
   
   <h4>Step 3: Secure Order Success Confirmation</h4>
   <p align="center">Instant client feedback window upon successful, asynchronous database insertion.</p>
-  <img src="Images/Index Page 3.png" alt="Customer Form Step 3 - Order Success" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
+  <img src="Images/Index Page 3 v2.png" alt="Customer Form Step 3 - Order Success" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
 </div>
 
 ---
@@ -49,7 +49,7 @@ A production-grade, zero-infrastructure e-commerce ordering engine and real-time
 <div align="center">
   <h4>Packaging Team Dashboard (`?view=worker`)</h4>
   <p align="center">Live feed panel tracking pending lists with integrated click-to-call links and automated financial rollback mechanics.</p>
-  <img src="Images/Worker.png" alt="Worker Packaging Dashboard" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
+  <img src="Images/Worker v2.png" alt="Worker Packaging Dashboard" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
 </div>
 
 ---
