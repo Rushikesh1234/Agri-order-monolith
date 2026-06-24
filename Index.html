@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body { background-color: #f4f7f4; font-family: sans-serif; }
+    
+    /* Re-engineered high-impact header configuration */
+    .header-banner { 
+      background-image: linear-gradient(rgba(27, 94, 32, 0.78), rgba(19, 70, 23, 0.85)), 
+                        url('https://drive.google.com/thumbnail?id=1rCZ9ADbRBdPDDKw1k2TXa4OZ1Z19FNZp&sz=w1000') !important;
+      background-color: transparent !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      color: white; 
+      padding: 35px 20px; 
+      text-align: center; 
+      border-radius: 0 0 20px 20px; 
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    
+    /* Centered circular logo styling */
+    .banner-logo {
+      width: 80px;
+      height: 80px;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .banner-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Sub-tagline layout script */
+    .banner-tagline {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      opacity: 0.95;
+    }
+
+    /* Massive, legible main brand titles */
+    .brand-title-en {
+      font-size: 2.2rem !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      margin-bottom: 2px !important;
+    }
+
+    .brand-title-mr {
+      font-size: 1.8rem !important;
+      font-weight: 700 !important;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      margin-bottom: 15px !important;
+    }
+
+    /* Premium motto badges to isolate text cleanly from image noise */
+    .motto-badge-yellow {
+      background-color: rgba(255, 193, 7, 0.2);
+      border: 1px solid rgba(255, 193, 7, 0.4);
+      color: #fff3cd;
+      padding: 6px 16px;
+      border-radius: 50px;
+      display: inline-block;
+      font-size: 1rem;
+    }
+
+    .motto-badge-pink {
+      background-color: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 5px 14px;
+      border-radius: 50px;
+      display: inline-block;
+      font-size: 0.9rem;
+    }
+    
+    .card { border-radius: 12px; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .category-title { background-color: #e8f5e9; color: #1b5e20; font-weight: bold; padding: 8px 15px; border-radius: 6px; margin-top: 20px; }
+    .item-row { border-bottom: 1px solid #edf2ed; padding: 12px 0; align-items: center; }
+    .weight-input { width: 100px; text-align: center; }
+    .unit-select { width: 80px; }
+    .qty-select { width: 85px; }
+    .page { display: none; }
+    .page.active { display: block; }
+  </style>
+</head>
+<body>
+
+<div class="container max-width-md my-4">
+  <!-- COMPONENT: HEADER BANNER BLOCK WITH HIGH-IMPACT BRAND HIERARCHY -->
+  <div class="header-banner mb-4">
+    <div class="banner-logo">
+      <img src="https://lh3.googleusercontent.com/d/1Hfii3BQjC2b8iiZqlkZIgLVQv8r56Vi3" alt="Logo">
+    </div>
+    
+    <p class="banner-tagline mb-3">🌿 नैसर्गिक सेंद्रिय शेतीतील भाज्या आणि फळे थेट शेतकरी रास्त भावात! 🌿</p>
+    
+    <h1 class="brand-title-en">MyFarmer Naturals Pune</h1>
+    <h2 class="brand-title-mr">मायफार्मर नॅचरल्स पुणे</h2>
+    
+    <div class="mb-2">
+      <div class="motto-badge-yellow fw-bold">🥗 विषमुक्त खा! निरोगी राहा! 🥗</div>
+    </div>
+    <div class="mb-4">
+      <div class="motto-badge-pink fst-italic">🌸 आरोग्य चांगलं तर सगळं म्हणजे सगळंच चांगलं! 🌸</div>
+    </div>
+    
+    <div class="bg-white text-dark p-3 rounded mx-auto text-start shadow-sm mb-3" style="max-width: 650px;">
+      <p class="fw-bold text-success text-center mb-1">Welcome to MyFarmer Naturals Pune!</p>
+      <p class="small text-muted text-center mb-3">We're committed to bringing you fresh pure Natural Farm Produce.</p>
+      
+      <div class="row g-3 small">
+        <div class="col-md-6 border-end">
+          <p class="mb-1 fw-bold text-success">📍 १) मायफार्मर नॅचरल्स, विठ्ठलवाडी</p>
+          <p class="text-muted mb-0">टीसीजीएल अग्रो ईंडस्ट्रीज प्रा.लि.<br>भारत पेट्रोलियम समोर, विठ्ठलवाडी, सिंहगड रोड, पुणे</p>
+        </div>
+        <div class="col-md-6">
+          <p class="mb-1 fw-bold text-success">📍 २) मायफार्मर नॅचरल्स, नांदेडसिटी</p>
+          <p class="text-muted mb-0">सरगम समोर, नांदेड सिटी, सिंहगड रोड, पुणे</p>
+        </div>
+      </div>
+      
+      <hr class="my-3">
+      
+      <p class="mb-2 text-center"><strong>📱 संपर्क (WhatsApp):</strong> <a href="https://wa.me/918669666889" class="text-decoration-none fw-bold text-success">8669666889</a> / <a href="https://wa.me/918669666989" class="text-decoration-none fw-bold text-success">8669666989</a></p>
+      <p class="mb-0 small fw-bold text-danger text-center">⚠️ Below Natural Vegetables & Fruits will be available on Wednesday Morning.</p>
+      <p class="text-muted fst-italic text-center mb-0" style="font-size: 0.85rem;">Note: Some produce may not be available if it's not ready for harvesting.</p>
+    </div>
+
+    <div class="alert alert-warning border-0 p-2 mx-auto mb-0 text-dark small" style="max-width: 650px; background-color: #fff3cd;">
+      🙏 कृपया प्लास्टिकचा वापर टाळण्यासाठी सहकार्य करावे. आपली कापडी पिशवी घराबाहेर पडताना कायम जवळ ठेवावी आणि पर्यावरणास हातभार लागावा ही विनंती. 🛍️
+    </div>
+  </div>
+
+  <!-- PAGE 1: SELECTION -->
+  <div id="page1" class="page active">
+    <div class="card p-4 mb-4">
+      <h5>ग्राहक माहिती (Customer Info)</h5>
+      <div class="mb-3">
+        <label class="form-label">नाव (Full Name) *</label>
+        <input type="text" id="custName" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">व्हॉट्सॲप नंबर (WhatsApp Number) *</label>
+        <input type="tel" id="custPhone" class="form-control" placeholder="उदा. 9876543210" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+        <div class="form-text text-muted small">कृपया १० अंकी वैध भारतीय मोबाईल नंबर प्रविष्ट करा (प्रारंभी 0 किंवा +91 लावू नये).</div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">पत्ता (Delivery Address) *</label>
+        <input type="text" id="custAddress" class="form-control" required>
+      </div>
+    </div>
+
+    <div class="card p-4">
+      <h5>निवडा भाज्या आणि फळे (Select Items)</h5>
+      <div id="inventoryContainer">Catalog loading...</div>
+      <button class="btn btn-success w-100 mt-4 py-2" onclick="goToPage2()">पुढील पानावर जा (Review Order) ➔</button>
+    </div>
+  </div>
+
+  <!-- PAGE 2: REVIEW -->
+  <div id="page2" class="page">
+    <div class="card p-4">
+      <h4 class="text-success mb-3">तुमची ऑर्डर (Your Summary)</h4>
+      <div id="reviewDetails" class="mb-3"></div>
+      <table class="table table-bordered">
+        <thead class="table-light">
+          <tr><th>Item (Rate)</th><th>Size/Unit</th><th>Qty</th><th>Total Price</th></tr>
+        </thead>
+        <tbody id="reviewTableBody"></tbody>
+      </table>
+      <div class="d-flex justify-content-between align-items-center my-3">
+        <h5>एकूण रक्कम (Grand Total):</h5>
+        <h3 class="text-success" id="grandTotalDisplay">₹0</h3>
+      </div>
+      <div class="row g-2">
+        <div class="col-6"><button class="btn btn-secondary w-100" onclick="goToPage1()">⬅ मागे फिरा (Back)</button></div>
+        <div class="col-6"><button class="btn btn-success w-100" id="submitBtn" onclick="submitOrder()">ऑर्डर निश्चित करा (Confirm & Submit)</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: SUCCESS -->
+  <div id="page3" class="page text-center py-5">
+    <div class="card p-5">
+      <h2 class="text-success">धन्यवाद! Order Received! 🎉</h2>
+      <p class="lead mt-3">तुमची ऑर्डर यशस्वीरित्या नोंदवली गेली आहे. दुकानदार लवकरच बिल पाठवेल.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  let inventoryData = {};
+  let cart = [];
+
+  window.onload = function() {
+    google.script.run.withSuccessHandler(renderInventory).getInventory();
+  };
+
+  function renderInventory(data) {
+    inventoryData = data;
+    let container = document.getElementById('inventoryContainer');
+    container.innerHTML = '';
+
+    for (let category in data) {
+      let catDiv = document.createElement('div');
+      catDiv.innerHTML = `<div class="category-title">${category}</div>`;
+      
+      data[category].forEach((item, index) => {
+        let cleanId = category.replace(/\s+/g, '') + index;
+        let row = document.createElement('div');
+        row.className = 'row item-row';
+        
+        let controlsHtml = '';
+        
+        if (item.configType === "By Weight (gm/kg)") {
+          controlsHtml = `
+            <div class="d-flex align-items-center justify-content-end">
+              <input type="number" class="form-control form-control-sm weight-input me-1" id="weight_${cleanId}" placeholder="उदा. 250" min="1" step="any">
+              <select class="form-select form-select-sm unit-select" id="unit_${cleanId}">
+                <option value="gm">gm</option>
+                <option value="kg">kg</option>
+              </select>
+            </div>
+          `;
+        } else {
+          let qtyOptionsHtml = '<option value="0">0</option>';
+          for(let i=1; i<=10; i++) { qtyOptionsHtml += `<option value="${i}">${i}</option>`; }
+          
+          controlsHtml = `
+            <div class="d-flex align-items-center justify-content-end">
+              <select class="form-select form-select-sm qty-select me-2" id="qty_${cleanId}">
+                ${qtyOptionsHtml}
+              </select>
+              <span class="small fw-bold text-secondary text-capitalize" style="min-width: 45px;">${item.baseUnit}</span>
+            </div>
+          `;
+        }
+
+        row.innerHTML = `
+          <div class="col-5 col-md-6">
+            <strong>${item.name}</strong><br>
+            <small class="text-muted">₹${item.price} / ${item.baseUnit}</small>
+          </div>
+          <div class="col-7 col-md-6">
+            ${controlsHtml}
+          </div>
+        `;
+        catDiv.appendChild(row);
+      });
+      container.appendChild(catDiv);
+    }
+  }
+
+  function goToPage2() {
+    let name = document.getElementById('custName').value.trim();
+    let phone = document.getElementById('custPhone').value.trim();
+    let address = document.getElementById('custAddress').value.trim();
+
+    if(!name || !phone || !address) {
+      alert("कृपया सर्व माहिती भरा! Please fill all customer fields.");
+      return;
+    }
+
+    let phonePattern = /^[6-9]\d{9}$/;
+    if(!phonePattern.test(phone)) {
+      alert("कृपया वैध १० अंकी मोबाईल नंबर प्रविष्ट करा! (उदा. 9876543210)");
+      return;
+    }
+
+    cart = [];
+    let grandTotal = 0;
+
+    for (let category in inventoryData) {
+      inventoryData[category].forEach((item, index) => {
+        let cleanId = category.replace(/\s+/g, '') + index;
+        
+        if (item.configType === "By Weight (gm/kg)") {
+          let weightInput = document.getElementById('weight_' + cleanId).value.trim();
+          
+          if (weightInput !== "") {
+            let weight = parseFloat(weightInput);
+            if (weight > 0) {
+              let unit = document.getElementById('unit_' + cleanId).value;
+              let basePrice = parseFloat(item.price);
+              
+              let multiplier = (unit === "gm") ? (weight / 1000) : weight;
+              let itemTotal = Math.round(basePrice * multiplier);
+              
+              grandTotal += itemTotal;
+              cart.push({
+                name: item.name,
+                rateInfo: ` (₹${basePrice}/${item.baseUnit})`,
+                displayUnit: weight + " " + unit,
+                qty: 1,
+                total: "₹" + itemTotal
+              });
+            }
+          }
+        } else {
+          let qtyVal = parseInt(document.getElementById('qty_' + cleanId).value);
+          if (qtyVal > 0) {
+            let basePrice = parseFloat(item.price);
+            let itemTotal = Math.round(basePrice * qtyVal);
+            
+            grandTotal += itemTotal;
+            cart.push({
+              name: item.name,
+              rateInfo: ` (₹${basePrice}/${item.baseUnit})`,
+              displayUnit: item.baseUnit,
+              qty: qtyVal,
+              total: "₹" + itemTotal
+            });
+          }
+        }
+      });
+    }
+
+    if(cart.length === 0) {
+      alert("कृपया किमान एक वस्तू तरी निवडा! Please select at least 1 item.");
+      return;
+    }
+
+    document.getElementById('reviewDetails').innerHTML = `<strong>Name:</strong> ${name} | <strong>Phone:</strong> ${phone}<br><strong>Address:</strong> ${address}`;
+    let tbody = document.getElementById('reviewTableBody');
+    tbody.innerHTML = '';
+    
+    cart.forEach(item => {
+      let qtyDisplay = (item.displayUnit.includes("gm") || item.displayUnit.includes("kg")) ? "-" : item.qty;
+      tbody.innerHTML += `
+        <tr>
+          <td><strong>${item.name}</strong><br><small class="text-muted">${item.rateInfo}</small></td>
+          <td>${item.displayUnit}</td>
+          <td>${qtyDisplay}</td>
+          <td><strong>${item.total}</strong></td>
+        </tr>`;
+    });
+    document.getElementById('grandTotalDisplay').innerText = '₹' + grandTotal;
+
+    switchPage('page2');
+  }
+
+  function goToPage1() { switchPage('page1'); }
+  
+  function switchPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  function submitOrder() {
+    let btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerText = "Processing...";
+
+    let customerData = {
+      name: document.getElementById('custName').value,
+      phone: document.getElementById('custPhone').value,
+      address: document.getElementById('custAddress').value
+    };
+    let grandTotal = document.getElementById('grandTotalDisplay').innerText;
+
+    google.script.run.withSuccessHandler(function() {
+      switchPage('page3');
+    }).processOrder(customerData, cart, grandTotal);
+  }
+</script>
+</body>
+</html>
