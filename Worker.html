@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    /* Premium CSS-driven organic leaf vector motif background */
+    body { 
+      background-color: #edf4f0; 
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(46, 125, 50, 0.04) 1px, transparent 1px),
+        radial-gradient(circle at 75% 60%, rgba(27, 94, 32, 0.03) 2px, transparent 2px),
+        linear-gradient(45deg, transparent 48%, rgba(46, 125, 50, 0.03) 50%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(27, 94, 32, 0.02) 50%, transparent 52%);
+      background-size: 40px 40px, 60px 60px, 80px 80px, 100px 100px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+      padding: 20px 10px; 
+    }
+    
+    .worker-title { color: #1b5e20; font-weight: 800; text-align: center; font-size: 1.6rem; letter-spacing: -0.5px; text-shadow: 0 1px 2px rgba(27, 94, 32, 0.1); }
+    
+    .order-card { 
+      background: white; 
+      border-radius: 16px; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.02); 
+      padding: 18px;
+      border: 1px solid #e1e8e3;
+      position: relative;
+      height: 100%; /* Ensures all cards in a row have matching equal height */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    
+    /* Top Row Headers */
+    .card-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .order-number { font-size: 0.85rem; font-weight: 700; color: #6c757d; background: #e9ecef; padding: 3px 8px; border-radius: 6px; }
+    .status-badge { font-size: 0.75rem; font-weight: 700; background-color: #fff3cd; color: #856404; padding: 4px 10px; border-radius: 50px; text-transform: uppercase; }
+    
+    /* Customer Info Section */
+    .cust-info { background: #f8f9fa; border-radius: 10px; padding: 12px; font-size: 0.95rem; margin-bottom: 14px; border: 1px solid #f1f3f5; }
+    .client-name { font-size: 1.1rem; font-weight: 700; color: #212529; display: block; margin-bottom: 4px; }
+    .detail-text { color: #495057; line-height: 1.4; display: block; margin-top: 3px; }
+    
+    /* Call Button Shortcut */
+    .btn-call { font-size: 0.85rem; padding: 4px 12px; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; margin-top: 6px; }
+    
+    /* Beautiful Shopping List Layout */
+    .items-box { 
+      font-size: 1.05rem; 
+      line-height: 1.6; 
+      color: #1a1a1a; 
+      white-space: pre-line; 
+      background-color: #fffdf0; 
+      border: 1px solid #ffeeba; 
+      padding: 14px; 
+      border-radius: 10px;
+      font-weight: 500;
+      flex-grow: 1; /* Pushes total section and complete button perfectly to the card bottom */
+    }
+    
+    .total-container { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 12px; border-top: 1px dashed #dee2e6; }
+    .total-label { font-size: 0.9rem; color: #6c757d; font-weight: 600; }
+    .total-price { font-size: 1.3rem; font-weight: 800; color: #1b5e20; }
+    
+    /* Dual action operational button layouts */
+    .action-button-group { display: flex; gap: 8px; margin-top: 15px; }
+    
+    .btn-pack-complete { background-color: #2e7d32; color: white; border: none; flex: 2; font-weight: 700; font-size: 1rem; padding: 12px 6px; border-radius: 12px; transition: all 0.2s ease; }
+    .btn-pack-complete:active { background-color: #1b5e20; transform: scale(0.98); }
+    .btn-pack-complete:disabled { background-color: #a5d6a7; }
+    
+    .btn-pack-cancel { background-color: #fff5f5; color: #e53e3e; border: 1px solid #fed7d7; flex: 1; font-weight: 700; font-size: 0.95rem; padding: 12px 6px; border-radius: 12px; transition: all 0.2s ease; }
+    .btn-pack-cancel:active { background-color: #fff0f0; transform: scale(0.98); }
+    .btn-pack-cancel:disabled { background-color: #fee2e2; color: #fc8181; }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid px-md-5">
+  <h3 class="worker-title mt-2">📦 पॅकिंग टीम डॅशबोर्ड</h3>
+  <p class="text-center text-muted small mb-3">MyFarmer Naturals Pune Operations</p>
+  
+  <div class="text-center mb-4">
+    <button class="btn btn-sm btn-white bg-white border shadow-sm px-4 rounded-pill" onclick="loadOrders()">🔄 Refresh Order Feed</button>
+  </div>
+  
+  <div id="ordersContainer" class="row g-4">Loading active packaging lists...</div>
+</div>
+
+<script>
+  window.onload = function() { loadOrders(); };
+
+  function loadOrders() {
+    let container = document.getElementById('ordersContainer');
+    container.className = "row g-4"; 
+    container.innerHTML = '<div class="col-12 text-center text-muted my-5">🔄 Fetching fresh rows from sheet...</div>';
+    
+    google.script.run
+      .withSuccessHandler(renderCards)
+      .withFailureHandler(showError)
+      .getWorkerOrders();
+  }
+
+  function showError(error) {
+    document.getElementById('ordersContainer').innerHTML = 
+      `<div class="col-12"><div class="alert alert-danger mx-2">❌ Error loading data: ${error.message}</div></div>`;
+  }
+
+  function renderCards(orders) {
+    let container = document.getElementById('ordersContainer');
+    if (!orders || orders.length === 0) {
+      container.className = "text-center py-5"; 
+      container.innerHTML = `
+        <div style="font-size: 4rem;">🎉</div>
+        <h4 class="fw-bold text-success mt-2">All Clear!</h4>
+        <p class="text-muted small">No pending packaging lists remaining.</p>`;
+      return;
+    }
+    
+    container.className = "row g-4"; 
+    container.innerHTML = '';
+    
+    orders.forEach((order, idx) => {
+      let colWrapper = document.createElement('div');
+      colWrapper.className = 'col-12 col-md-6 col-lg-4';
+      colWrapper.id = 'wrapper_' + order.rowNumber;
+      
+      let safeName = order.name || 'Unknown Client';
+      let safeAddress = order.address || 'No Address Provided';
+      let safePhone = order.phone || '';
+      let safeItems = order.items || 'No items listed';
+      let safeTotal = order.total || '₹0';
+      
+      if(safePhone.startsWith("'")) { safePhone = safePhone.substring(1); }
+      
+      colWrapper.innerHTML = `
+        <div class="order-card" id="card_${order.rowNumber}">
+          <div>
+            <div class="card-top-row">
+              <span class="order-number">ORDER #${order.rowNumber}</span>
+              <span class="status-badge">⏳ PENDING PACK</span>
+            </div>
+            
+            <div class="cust-info">
+              <span class="client-name">👤 ${safeName}</span>
+              <span class="detail-text"><strong>📍 Address:</strong> ${safeAddress}</span>
+              ${safePhone ? `
+                <div class="mt-2">
+                  <a href="tel:${safePhone}" class="btn btn-sm btn-outline-success btn-call">📞 Call Customer (${safePhone})</a>
+                </div>` : ''}
+            </div>
+            
+            <div class="items-box">
+              <div class="fw-bold mb-2" style="color: #856404; font-size: 0.9rem;">🛒 ITEMS TO PACK:</div>
+              ${safeItems}
+            </div>
+          </div>
+          
+          <div>
+            <div class="total-container">
+              <span class="total-label">Collect Amount:</span>
+              <span class="total-price">${safeTotal}</span>
+            </div>
+            
+            <div class="action-button-group">
+              <button class="btn-pack-cancel" onclick="cancelOrder(${order.rowNumber})">
+                ❌ Cancel
+              </button>
+              <button class="btn-pack-complete" onclick="completeOrder(${order.rowNumber})">
+                ✔️ Packed Done
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      container.appendChild(colWrapper);
+    });
+  }
+
+  function completeOrder(rowNum) {
+    let card = document.getElementById(`card_${rowNum}`);
+    let compBtn = card.querySelector('.btn-pack-complete');
+    let cancBtn = card.querySelector('.btn-pack-cancel');
+    
+    compBtn.disabled = true;
+    cancBtn.disabled = true;
+    compBtn.innerText = "Saving...";
+    
+    google.script.run
+      .withSuccessHandler(function() {
+        removeCardFromGrid(rowNum);
+      })
+      .withFailureHandler(function(err) {
+        alert("Failed to update status: " + err.message);
+        compBtn.disabled = false;
+        cancBtn.disabled = false;
+        compBtn.innerText = "✔️ Packed Done";
+      })
+      .updateOrderStatus(rowNum); // Calls existing Packed workflow script logic
+  }
+
+  function cancelOrder(rowNum) {
+    if (!confirm("Are you sure you want to CANCEL Order #" + rowNum + "?")) {
+      return;
+    }
+    
+    let card = document.getElementById(`card_${rowNum}`);
+    let compBtn = card.querySelector('.btn-pack-complete');
+    let cancBtn = card.querySelector('.btn-pack-cancel');
+    
+    compBtn.disabled = true;
+    cancBtn.disabled = true;
+    cancBtn.innerText = "Cancelling...";
+    
+    // Calls the dynamic updateOrderStatus function modifying value parameters to "Cancelled"
+    google.script.run
+      .withSuccessHandler(function() {
+        removeCardFromGrid(rowNum);
+      })
+      .withFailureHandler(function(err) {
+        alert("Failed to cancel order: " + err.message);
+        compBtn.disabled = false;
+        cancBtn.disabled = false;
+        cancBtn.innerText = "❌ Cancel";
+      })
+      .updateOrderStatus(rowNum, "Cancelled"); 
+  }
+
+  function removeCardFromGrid(rowNum) {
+    let wrapper = document.getElementById('wrapper_' + rowNum);
+    wrapper.style.transition = "all 0.4s ease";
+    wrapper.style.opacity = "0";
+    wrapper.style.transform = "scale(0.9)";
+    
+    setTimeout(function() {
+      wrapper.remove();
+      if(document.querySelectorAll('.order-card').length === 0) {
+        loadOrders(); 
+      }
+    }, 400);
+  }
+</script>
+</body>
+</html>
