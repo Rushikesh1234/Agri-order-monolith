@@ -27,7 +27,7 @@ A production-grade, zero-infrastructure e-commerce ordering engine and real-time
 <div align="center">
   <h4>Step 1: Customer Details & Smart Catalog Selection</h4>
   <p align="center">Features dynamic inventory grouping by category and input masking for telephone validation.</p>
-  <img src="Images/Index v2.png" alt="Customer Form Step 1 - Catalog Selection" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
+  <img src="Images/Index v3.png" alt="Customer Form Step 1 - Catalog Selection" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
   
   <br/><br/>
   
@@ -49,7 +49,7 @@ A production-grade, zero-infrastructure e-commerce ordering engine and real-time
 <div align="center">
   <h4>Packaging Team Dashboard (`?view=worker`)</h4>
   <p align="center">Live feed panel tracking pending lists with integrated click-to-call links and automated financial rollback mechanics.</p>
-  <img src="Images/Worker v2.png" alt="Worker Packaging Dashboard" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
+  <img src="Images/Worker v3.png" alt="Worker Packaging Dashboard" width="600px" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #e1e8e3;"/>
 </div>
 
 ---
