@@ -11,7 +11,6 @@ function doGet(e) {
     .addMetaTag('viewport', 'width=device-width, initial-scale=1.0');
 }
 
-// Fetch items grouped by category with dynamic config type mappings
 function getInventory() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Inventory");
   var data = sheet.getDataRange().getValues();
@@ -39,11 +38,10 @@ function getInventory() {
   return inventory;
 }
 
-// Save order to Sheet & update Item Sales summaries dynamically (with Revenue)
 function processOrder(customerData, cartItems, grandTotal) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  
   var orderSheet = ss.getSheetByName("Orders");
+  
   var orderSummary = cartItems.map(function(item) {
     return item.name + " (" + item.displayUnit + ") x " + item.qty + " - " + item.total;
   }).join("\n");
@@ -64,30 +62,33 @@ function processOrder(customerData, cartItems, grandTotal) {
     
     var itemRowMap = {};
     for (var r = 1; r < summaryData.length; r++) {
-      var key = summaryData[r][0] + "|||" + summaryData[r][1]; // ItemName|||UnitType
-      itemRowMap[key] = r + 1; // Store actual spreadsheet row number
+      var key = summaryData[r][0] + "|||" + summaryData[r][1];
+      itemRowMap[key] = r + 1;
     }
     
     cartItems.forEach(function(item) {
       var itemName = item.name;
       var rawUnit = item.displayUnit ? item.displayUnit.toLowerCase().trim() : "";
-      var orderQty = parseFloat(item.qty) || 0;
-      
       var itemLineRevenue = parseFloat(item.total.toString().replace(/[^0-9.]/g, '')) || 0;
       
-      var calculatedQty = orderQty;
+      var calculatedQty = 0;
       var finalUnitLabel = "Count (pc/bundle/jar)";
       
-      if (rawUnit.includes("kg") || rawUnit.includes("कियलो")) {
-        calculatedQty = orderQty;
+      // Algorithmic parse that loops through complex combined string types (e.g. "1 kg 500 gm")
+      if (rawUnit.includes("kg") || rawUnit.includes("gm") || rawUnit.includes("कियलो") || rawUnit.includes("ग्राम")) {
         finalUnitLabel = "kg";
-      } else if (rawUnit.includes("gm") || rawUnit.includes("ग्राम")) {
-        var numericWeight = parseFloat(rawUnit.replace(/[^0-9.]/g, ''));
-        if (!numericWeight || isNaN(numericWeight)) { numericWeight = 250; }
-        calculatedQty = (numericWeight * orderQty) / 1000;
-        finalUnitLabel = "kg";
+        var totalParsedKg = 0;
+        
+        // Match specific structural units anywhere in the display text
+        var kgMatch = rawUnit.match(/([0-9.]+)\s*(kg|कियलो)/);
+        var gmMatch = rawUnit.match(/([0-9.]+)\s*(gm|ग्राम)/);
+        
+        if (kgMatch) { totalParsedKg += parseFloat(kgMatch[1]) || 0; }
+        if (gmMatch) { totalParsedKg += (parseFloat(gmMatch[1]) || 0) / 1000; }
+        
+        calculatedQty = totalParsedKg;
       } else {
-        calculatedQty = orderQty;
+        calculatedQty = parseFloat(item.qty) || 0;
         finalUnitLabel = "Count (pc/bundle/jar)";
       }
       
@@ -95,7 +96,6 @@ function processOrder(customerData, cartItems, grandTotal) {
       
       if (itemRowMap[mapKey]) {
         var targetRow = itemRowMap[mapKey];
-        
         var qtyCell = summarySheet.getRange(targetRow, 3);
         var currentQty = parseFloat(qtyCell.getValue()) || 0;
         qtyCell.setValue(currentQty + calculatedQty);
@@ -103,10 +103,8 @@ function processOrder(customerData, cartItems, grandTotal) {
         var revCell = summarySheet.getRange(targetRow, 4);
         var currentRev = parseFloat(revCell.getValue()) || 0;
         revCell.setValue(currentRev + itemLineRevenue);
-        
       } else {
         summarySheet.appendRow([itemName, finalUnitLabel, calculatedQty, itemLineRevenue]);
-        
         summaryData = summarySheet.getDataRange().getValues();
         itemRowMap[mapKey] = summaryData.length;
       }
@@ -114,11 +112,9 @@ function processOrder(customerData, cartItems, grandTotal) {
   } catch (err) {
     Logger.log("Item Summary Revenue Tracking Error: " + err.toString());
   }
-  
   return true;
 }
 
-// Read active orders cleanly - ONLY loads "Pending" orders now
 function getWorkerOrders() {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Orders");
@@ -127,12 +123,9 @@ function getWorkerOrders() {
     
     for (var i = 1; i < data.length; i++) {
       var row = data[i];
-      
       if (!row[1] || !row[6]) continue; 
-      
       var currentStatus = row[6].toString().trim();
       
-      // Changed from !== "Packed" to STRICTLY === "Pending" so Cancelled entries vanish instantly
       if (currentStatus === "Pending") { 
         ordersList.push({
           rowNumber: i + 1,
@@ -153,7 +146,6 @@ function getWorkerOrders() {
   }
 }
 
-// Handles state updates and automatically subtracts metrics on active cancellations
 function updateOrderStatus(rowNumber, customStatus) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Orders");
@@ -161,19 +153,15 @@ function updateOrderStatus(rowNumber, customStatus) {
   
   if (customStatus === "Cancelled") {
     var previousStatus = sheet.getRange(rowNumber, 7).getValue().toString().trim();
-    
-    // Safety check: Only deduct values if the target row wasn't already marked cancelled
     if (previousStatus !== "Cancelled") {
       var orderSummary = sheet.getRange(rowNumber, 5).getValue().toString();
       deductFromSummary(ss, orderSummary);
     }
   }
-  
   sheet.getRange(rowNumber, 7).setValue(finalStatus);
   return true;
 }
 
-// Helper engine that parses text maps backwards to reverse totals cleanly
 function deductFromSummary(ss, orderSummary) {
   try {
     var summarySheet = ss.getSheetByName("ItemSalesSummary");
@@ -190,19 +178,16 @@ function deductFromSummary(ss, orderSummary) {
     lines.forEach(function(line) {
       if (!line.trim()) return;
       
-      // Step A: Parse out the revenue string boundary
       var parts = line.split(" - ");
       if (parts.length < 2) return;
       var totalStr = parts.pop();
       var itemPart = parts.join(" - ");
       
-      // Step B: Parse out line item quantities
       var qtyParts = itemPart.split(" x ");
       if (qtyParts.length < 2) return;
       var qtyStr = qtyParts.pop();
       var detailsPart = qtyParts.join(" x ");
       
-      // Step C: Isolate item names from their descriptive bracket metrics
       var openParen = detailsPart.lastIndexOf(" (");
       var closeParen = detailsPart.lastIndexOf(")");
       if (openParen === -1 || closeParen === -1) return;
@@ -210,22 +195,23 @@ function deductFromSummary(ss, orderSummary) {
       var itemName = detailsPart.substring(0, openParen).trim();
       var rawUnit = detailsPart.substring(openParen + 2, closeParen).toLowerCase().trim();
       
-      var orderQty = parseFloat(qtyStr) || 0;
       var itemLineRevenue = parseFloat(totalStr.replace(/[^0-9.]/g, '')) || 0;
-      
-      var calculatedQty = orderQty;
+      var calculatedQty = 0;
       var finalUnitLabel = "Count (pc/bundle/jar)";
       
-      if (rawUnit.includes("kg") || rawUnit.includes("कियलो")) {
-        calculatedQty = orderQty;
+      if (rawUnit.includes("kg") || rawUnit.includes("gm") || rawUnit.includes("कियलो") || rawUnit.includes("ग्राम")) {
         finalUnitLabel = "kg";
-      } else if (rawUnit.includes("gm") || rawUnit.includes("ग्राम")) {
-        var numericWeight = parseFloat(rawUnit.replace(/[^0-9.]/g, ''));
-        if (!numericWeight || isNaN(numericWeight)) { numericWeight = 250; }
-        calculatedQty = (numericWeight * orderQty) / 1000;
-        finalUnitLabel = "kg";
+        var totalParsedKg = 0;
+        
+        var kgMatch = rawUnit.match(/([0-9.]+)\s*(kg|कियलो)/);
+        var gmMatch = rawUnit.match(/([0-9.]+)\s*(gm|ग्राम)/);
+        
+        if (kgMatch) { totalParsedKg += parseFloat(kgMatch[1]) || 0; }
+        if (gmMatch) { totalParsedKg += (parseFloat(gmMatch[1]) || 0) / 1000; }
+        
+        calculatedQty = totalParsedKg;
       } else {
-        calculatedQty = orderQty;
+        calculatedQty = parseFloat(qtyStr) || 0;
         finalUnitLabel = "Count (pc/bundle/jar)";
       }
       
@@ -233,13 +219,10 @@ function deductFromSummary(ss, orderSummary) {
       
       if (itemRowMap[mapKey]) {
         var targetRow = itemRowMap[mapKey];
-        
-        // Subtract Quantity cell contents precisely
         var qtyCell = summarySheet.getRange(targetRow, 3);
         var currentQty = parseFloat(qtyCell.getValue()) || 0;
         qtyCell.setValue(Math.max(0, currentQty - calculatedQty));
         
-        // Subtract Financial revenue parameters precisely
         var revCell = summarySheet.getRange(targetRow, 4);
         var currentRev = parseFloat(revCell.getValue()) || 0;
         revCell.setValue(Math.max(0, currentRev - itemLineRevenue));
