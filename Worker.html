@@ -108,6 +108,26 @@
       `<div class="col-12"><div class="alert alert-danger mx-2">❌ Error loading data: ${error.message}</div></div>`;
   }
 
+  // Formats standard string date objects into a cleaner representation
+  function formatTimestamp(tsString) {
+    if (!tsString) return 'N/A';
+    try {
+      let d = new Date(tsString);
+      if (isNaN(d.getTime())) return tsString; // Fallback directly if parsing fails
+      
+      return d.toLocaleString('en-IN', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
+    } catch(e) {
+      return tsString;
+    }
+  }
+
   function renderCards(orders) {
     let container = document.getElementById('ordersContainer');
     if (!orders || orders.length === 0) {
@@ -131,7 +151,8 @@
       let safeAddress = order.address || 'No Address Provided';
       let safePhone = order.phone || '';
       let safeItems = order.items || 'No items listed';
-      let safeTotal = order.total || '₹0';
+      let safeTotal = order.total || '₹0.00';
+      let formattedTime = formatTimestamp(order.timestamp);
       
       if(safePhone.startsWith("'")) { safePhone = safePhone.substring(1); }
       
@@ -140,11 +161,12 @@
           <div>
             <div class="card-top-row">
               <span class="order-number">ORDER #${order.rowNumber}</span>
-              <span class="status-badge">⏳ PENDING PACK</span>
+              <span class="status-badge">⏳ TO BE PACKED</span>
             </div>
             
             <div class="cust-info">
               <span class="client-name">👤 ${safeName}</span>
+              <span class="detail-text"><strong>🕒 Ordered At:</strong> ${formattedTime}</span>
               <span class="detail-text"><strong>📍 Address:</strong> ${safeAddress}</span>
               ${safePhone ? `
                 <div class="mt-2">
@@ -196,9 +218,9 @@
         alert("Failed to update status: " + err.message);
         compBtn.disabled = false;
         cancBtn.disabled = false;
-        compBtn.innerText = "✔️ Packed Done";
+        compBtn.innerText = "✔️ Packed or Ready to Go";
       })
-      .updateOrderStatus(rowNum); // Calls existing Packed workflow script logic
+      .updateOrderStatus(rowNum);
   }
 
   function cancelOrder(rowNum) {
@@ -214,7 +236,6 @@
     cancBtn.disabled = true;
     cancBtn.innerText = "Cancelling...";
     
-    // Calls the dynamic updateOrderStatus function modifying value parameters to "Cancelled"
     google.script.run
       .withSuccessHandler(function() {
         removeCardFromGrid(rowNum);
