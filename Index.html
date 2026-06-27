@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <style>
-    body { background-color: #f4f7f4; font-family: sans-serif; }
+    body { background-color: #f4f7f4; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     
-    /* Re-engineered high-impact header configuration */
     .header-banner { 
       background-image: linear-gradient(rgba(27, 94, 32, 0.78), rgba(19, 70, 23, 0.85)), 
                         url('https://drive.google.com/thumbnail?id=1rCZ9ADbRBdPDDKw1k2TXa4OZ1Z19FNZp&sz=w1000') !important;
@@ -20,7 +20,6 @@
       box-shadow: 0 6px 15px rgba(0,0,0,0.2);
     }
     
-    /* Centered circular logo styling */
     .banner-logo {
       width: 80px;
       height: 80px;
@@ -33,63 +32,33 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       overflow: hidden;
     }
-
-    .banner-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Sub-tagline layout script */
-    .banner-tagline {
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      opacity: 0.95;
-    }
-
-    /* Massive, legible main brand titles */
-    .brand-title-en {
-      font-size: 2.2rem !important;
-      font-weight: 800 !important;
-      letter-spacing: -0.5px;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-      margin-bottom: 2px !important;
-    }
-
-    .brand-title-mr {
-      font-size: 1.8rem !important;
-      font-weight: 700 !important;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-      margin-bottom: 15px !important;
-    }
-
-    /* Premium motto badges to isolate text cleanly from image noise */
-    .motto-badge-yellow {
-      background-color: rgba(255, 193, 7, 0.2);
-      border: 1px solid rgba(255, 193, 7, 0.4);
-      color: #fff3cd;
-      padding: 6px 16px;
-      border-radius: 50px;
-      display: inline-block;
-      font-size: 1rem;
-    }
-
-    .motto-badge-pink {
-      background-color: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-      padding: 5px 14px;
-      border-radius: 50px;
-      display: inline-block;
-      font-size: 0.9rem;
-    }
+    .banner-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .banner-tagline { font-size: 1.05rem; font-weight: 600; letter-spacing: 0.5px; opacity: 0.95; }
+    .brand-title-en { font-size: 2.2rem !important; font-weight: 800 !important; letter-spacing: -0.5px; margin-bottom: 2px !important; }
+    .brand-title-mr { font-size: 1.8rem !important; font-weight: 700 !important; margin-bottom: 15px !important; }
+    .motto-badge-yellow { background-color: rgba(255, 193, 7, 0.2); border: 1px solid rgba(255, 193, 7, 0.4); color: #fff3cd; padding: 6px 16px; border-radius: 50px; display: inline-block; font-size: 1rem; }
+    .motto-badge-pink { background-color: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; padding: 5px 14px; border-radius: 50px; display: inline-block; font-size: 0.9rem; }
     
     .card { border-radius: 12px; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-    .category-title { background-color: #e8f5e9; color: #1b5e20; font-weight: bold; padding: 8px 15px; border-radius: 6px; margin-top: 20px; }
-    .item-row { border-bottom: 1px solid #edf2ed; padding: 12px 0; align-items: center; }
-    .weight-input { width: 100px; text-align: center; }
-    .unit-select { width: 80px; }
+    
+    /* Search Bar custom enhancements */
+    .search-wrapper { position: relative; margin-bottom: 25px; }
+    .search-input { padding: 12px 20px; border-radius: 30px; border: 2px solid #ced4da; font-size: 1rem; transition: all 0.2s ease; box-shadow: inset 0 1px 3px rgba(0,0,0,0.06); }
+    .search-input:focus { border-color: #2e7d32; box-shadow: 0 0 0 0.25rem rgba(46,125,50,0.25); outline: 0; }
+    
+    /* Nesting Hierarchy Accent Styles */
+    .parent-header-btn { width: 100%; background: #1b5e20; color: white; font-weight: 800; border: none; padding: 14px 20px; border-radius: 10px; text-align: left; transition: all 0.2s ease; font-size: 1.15rem; box-shadow: 0 4px 10px rgba(27,94,32,0.15); }
+    .parent-header-btn:focus, .parent-header-btn:hover { background: #154d19; color: white; }
+    
+    .sub-category-card { background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 12px; overflow: hidden; transition: all 0.2s; }
+    .sub-category-title-btn { width: 100%; background-color: #e8f5e9; color: #2e7d32; font-weight: 700; padding: 12px 18px; text-align: left; border: none; transition: background 0.2s; font-size: 1rem; }
+    .sub-category-title-btn:hover { background-color: #c8e6c9; }
+    
+    .item-row { border-bottom: 1px solid #edf2ed; padding: 14px 16px; align-items: center; background-color: #fafdfb; transition: background-color 0.2s; }
+    .item-row:last-child { border-bottom: none; }
+    .item-highlight { background-color: #fffde7 !important; }
+    
+    .weight-box-sm { width: 75px; text-align: center; }
     .qty-select { width: 85px; }
     .page { display: none; }
     .page.active { display: block; }
@@ -98,28 +67,19 @@
 <body>
 
 <div class="container max-width-md my-4">
-  <!-- COMPONENT: HEADER BANNER BLOCK WITH HIGH-IMPACT BRAND HIERARCHY -->
   <div class="header-banner mb-4">
     <div class="banner-logo">
       <img src="https://lh3.googleusercontent.com/d/1Hfii3BQjC2b8iiZqlkZIgLVQv8r56Vi3" alt="Logo">
     </div>
-    
     <p class="banner-tagline mb-3">🌿 नैसर्गिक सेंद्रिय शेतीतील भाज्या आणि फळे थेट शेतकरी रास्त भावात! 🌿</p>
-    
     <h1 class="brand-title-en">MyFarmer Naturals Pune</h1>
     <h2 class="brand-title-mr">मायफार्मर नॅचरल्स पुणे</h2>
-    
-    <div class="mb-2">
-      <div class="motto-badge-yellow fw-bold">🥗 विषमुक्त खा! निरोगी राहा! 🥗</div>
-    </div>
-    <div class="mb-4">
-      <div class="motto-badge-pink fst-italic">🌸 आरोग्य चांगलं तर सगळं म्हणजे सगळंच चांगलं! 🌸</div>
-    </div>
+    <div class="mb-2"><div class="motto-badge-yellow fw-bold">🥗 विषमुक्त खा! निरोगी राहा! 🥗</div></div>
+    <div class="mb-4"><div class="motto-badge-pink fst-italic">🌸 आरोग्य चांगलं तर सगळं म्हणजे सगळंच चांगलं! 🌸</div></div>
     
     <div class="bg-white text-dark p-3 rounded mx-auto text-start shadow-sm mb-3" style="max-width: 650px;">
       <p class="fw-bold text-success text-center mb-1">Welcome to MyFarmer Naturals Pune!</p>
       <p class="small text-muted text-center mb-3">We're committed to bringing you fresh pure Natural Farm Produce.</p>
-      
       <div class="row g-3 small">
         <div class="col-md-6 border-end">
           <p class="mb-1 fw-bold text-success">📍 १) मायफार्मर नॅचरल्स, विठ्ठलवाडी</p>
@@ -130,20 +90,12 @@
           <p class="text-muted mb-0">सरगम समोर, नांदेड सिटी, सिंहगड रोड, पुणे</p>
         </div>
       </div>
-      
       <hr class="my-3">
-      
       <p class="mb-2 text-center"><strong>📱 संपर्क (WhatsApp):</strong> <a href="https://wa.me/918669666889" class="text-decoration-none fw-bold text-success">8669666889</a> / <a href="https://wa.me/918669666989" class="text-decoration-none fw-bold text-success">8669666989</a></p>
       <p class="mb-0 small fw-bold text-danger text-center">⚠️ Below Natural Vegetables & Fruits will be available on Wednesday Morning.</p>
-      <p class="text-muted fst-italic text-center mb-0" style="font-size: 0.85rem;">Note: Some produce may not be available if it's not ready for harvesting.</p>
-    </div>
-
-    <div class="alert alert-warning border-0 p-2 mx-auto mb-0 text-dark small" style="max-width: 650px; background-color: #fff3cd;">
-      🙏 कृपया प्लास्टिकचा वापर टाळण्यासाठी सहकार्य करावे. आपली कापडी पिशवी घराबाहेर पडताना कायम जवळ ठेवावी आणि पर्यावरणास हातभार लागावा ही विनंती. 🛍️
     </div>
   </div>
 
-  <!-- PAGE 1: SELECTION -->
   <div id="page1" class="page active">
     <div class="card p-4 mb-4">
       <h5>ग्राहक माहिती (Customer Info)</h5>
@@ -154,7 +106,6 @@
       <div class="mb-3">
         <label class="form-label">व्हॉट्सॲप नंबर (WhatsApp Number) *</label>
         <input type="tel" id="custPhone" class="form-control" placeholder="उदा. 9876543210" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-        <div class="form-text text-muted small">कृपया १० अंकी वैध भारतीय मोबाईल नंबर प्रविष्ट करा (प्रारंभी 0 किंवा +91 लावू नये).</div>
       </div>
       <div class="mb-3">
         <label class="form-label">पत्ता (Delivery Address) *</label>
@@ -162,17 +113,44 @@
       </div>
     </div>
 
-    <div class="card p-4">
-      <h5>निवडा भाज्या आणि फळे (Select Items)</h5>
-      <div id="inventoryContainer">Catalog loading...</div>
-      <button class="btn btn-success w-100 mt-4 py-2" onclick="goToPage2()">पुढील पानावर जा (Review Order) ➔</button>
+    <div class="search-wrapper">
+      <input type="text" id="globalSearchInput" class="form-control search-input shadow-sm" placeholder="🔍 शोध घ्या... Search items here (e.g. Tomato, आंबा)" onkeyup="filterCatalog()">
     </div>
+
+    <h5 class="mb-3 fw-bold text-dark text-center">🛒 श्रेण्या निवडा (Choose Main Section)</h5>
+    
+    <div class="accordion" id="rootCategoryAccordion">
+      
+      <div class="accordion-item border-0 mb-3 bg-transparent" id="parentRoot_Fresh">
+        <h2 class="accordion-header" id="headingFresh">
+          <button class="parent-header-btn collapsed" type="button" id="btnParentFresh" data-bs-toggle="collapse" data-bs-target="#collapseFresh" aria-expanded="false" aria-controls="collapseFresh">
+            🥦 Fresh Produce & Dairy / Perishables
+          </button>
+        </h2>
+        <div id="collapseFresh" class="accordion-collapse collapse mt-2" aria-labelledby="headingFresh" data-bs-parent="#rootCategoryAccordion">
+          <div class="accordion-body p-0" id="subContainer_Fresh"></div>
+        </div>
+      </div>
+
+      <div class="accordion-item border-0 mb-3 bg-transparent" id="parentRoot_Dry">
+        <h2 class="accordion-header" id="headingDry">
+          <button class="parent-header-btn collapsed" type="button" id="btnParentDry" data-bs-toggle="collapse" data-bs-target="#collapseDry" aria-expanded="false" aria-controls="collapseDry">
+            🌾 Dry Groceries & Staples / Pantry
+          </button>
+        </h2>
+        <div id="collapseDry" class="accordion-collapse collapse mt-2" aria-labelledby="headingDry" data-bs-parent="#rootCategoryAccordion">
+          <div class="accordion-body p-0" id="subContainer_Dry"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="btn btn-success w-100 mt-4 py-2 fw-bold" onclick="goToPage2()">पुढील पानावर जा (Review Order) ➔</button>
   </div>
 
-  <!-- PAGE 2: REVIEW -->
   <div id="page2" class="page">
     <div class="card p-4">
-      <h4 class="text-success mb-3">तुमची ऑर्डर (Your Summary)</h4>
+      <h4 class="text-success mb-3">तुमची ORDER (Your Summary)</h4>
       <div id="reviewDetails" class="mb-3"></div>
       <table class="table table-bordered">
         <thead class="table-light">
@@ -182,7 +160,7 @@
       </table>
       <div class="d-flex justify-content-between align-items-center my-3">
         <h5>एकूण रक्कम (Grand Total):</h5>
-        <h3 class="text-success" id="grandTotalDisplay">₹0</h3>
+        <h3 class="text-success" id="grandTotalDisplay">₹0.00</h3>
       </div>
       <div class="row g-2">
         <div class="col-6"><button class="btn btn-secondary w-100" onclick="goToPage1()">⬅ मागे फिरा (Back)</button></div>
@@ -191,7 +169,6 @@
     </div>
   </div>
 
-  <!-- PAGE 3: SUCCESS -->
   <div id="page3" class="page text-center py-5">
     <div class="card p-5">
       <h2 class="text-success">धन्यवाद! Order Received! 🎉</h2>
@@ -200,44 +177,73 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   let inventoryData = {};
   let cart = [];
+
+  const FRESH_CATEGORIES = ["Leafy Vegetables", "Fruity Vegetables", "Leguminous Beans", "Fruits", "Dairy Products"];
+  const DRY_CATEGORIES = ["Sprouts & Grains", "Readymade Flour", "Rice", "Dried Legumes", "Jaggery", "Spices & Powders", "Cold Pressed Oils", "Millets & Mixes", "Ready Food Items", "Pickles", "Others & Snacks", "Personal Care & Puja"];
+
+  // Formatter configuration for Indian Currency representation with decimals
+  const currencyFormatter = new Intl.NumberFormat('en-IN', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
 
   window.onload = function() {
     google.script.run.withSuccessHandler(renderInventory).getInventory();
   };
 
   function renderInventory(data) {
+    let freshContainer = document.getElementById('subContainer_Fresh');
+    let dryContainer = document.getElementById('subContainer_Dry');
+    
+    freshContainer.innerHTML = '';
+    dryContainer.innerHTML = '';
     inventoryData = data;
-    let container = document.getElementById('inventoryContainer');
-    container.innerHTML = '';
 
     for (let category in data) {
-      let catDiv = document.createElement('div');
-      catDiv.innerHTML = `<div class="category-title">${category}</div>`;
+      let isFresh = FRESH_CATEGORIES.includes(category);
+      let targetDiv = isFresh ? freshContainer : dryContainer;
+      let parentParentId = isFresh ? '#collapseFresh' : '#collapseDry';
       
+      let safeId = category.replace(/[^a-zA-Z0-9]/g, '');
+      
+      let subCatCard = document.createElement('div');
+      subCatCard.className = 'sub-category-card';
+      subCatCard.id = 'subCatCard_' + safeId;
+      
+      let innerHtml = `
+        <button class="sub-category-title-btn collapsed" type="button" id="btnInner_${safeId}" data-bs-toggle="collapse" data-bs-target="#inner_${safeId}" aria-expanded="false" aria-controls="inner_${safeId}">
+          📂 ${category}
+        </button>
+        <div id="inner_${safeId}" class="collapse" data-bs-parent="${parentParentId}">
+          <div class="inner-items-block"></div>
+        </div>
+      `;
+      subCatCard.innerHTML = innerHtml;
+      let itemsBlock = subCatCard.querySelector('.inner-items-block');
+
       data[category].forEach((item, index) => {
-        let cleanId = category.replace(/\s+/g, '') + index;
+        let cleanId = safeId + index;
         let row = document.createElement('div');
         row.className = 'row item-row';
+        row.setAttribute('data-item-name', item.name.toLowerCase());
         
         let controlsHtml = '';
-        
         if (item.configType === "By Weight (gm/kg)") {
           controlsHtml = `
-            <div class="d-flex align-items-center justify-content-end">
-              <input type="number" class="form-control form-control-sm weight-input me-1" id="weight_${cleanId}" placeholder="उदा. 250" min="1" step="any">
-              <select class="form-select form-select-sm unit-select" id="unit_${cleanId}">
-                <option value="gm">gm</option>
-                <option value="kg">kg</option>
-              </select>
+            <div class="d-flex align-items-center justify-content-end g-1">
+              <input type="number" class="form-control form-control-sm weight-box-sm me-1" id="kg_${cleanId}" placeholder="KG" min="0" step="any">
+              <span class="small fw-bold text-muted me-2">kg</span>
+              <input type="number" class="form-control form-control-sm weight-box-sm me-1" id="gm_${cleanId}" placeholder="GM" min="0" step="any">
+              <span class="small fw-bold text-muted">gm</span>
             </div>
           `;
         } else {
           let qtyOptionsHtml = '<option value="0">0</option>';
           for(let i=1; i<=10; i++) { qtyOptionsHtml += `<option value="${i}">${i}</option>`; }
-          
           controlsHtml = `
             <div class="d-flex align-items-center justify-content-end">
               <select class="form-select form-select-sm qty-select me-2" id="qty_${cleanId}">
@@ -250,16 +256,95 @@
 
         row.innerHTML = `
           <div class="col-5 col-md-6">
-            <strong>${item.name}</strong><br>
+            <strong class="item-text-target">${item.name}</strong><br>
             <small class="text-muted">₹${item.price} / ${item.baseUnit}</small>
           </div>
           <div class="col-7 col-md-6">
             ${controlsHtml}
           </div>
         `;
-        catDiv.appendChild(row);
+        itemsBlock.appendChild(row);
       });
-      container.appendChild(catDiv);
+      
+      targetDiv.appendChild(subCatCard);
+    }
+  }
+
+  function filterCatalog() {
+    let query = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+    
+    let parentFreshVisible = false;
+    let parentDryVisible = false;
+
+    let collapseFreshEl = document.getElementById('collapseFresh');
+    let collapseDryEl = document.getElementById('collapseDry');
+    
+    let bsCollapseFresh = bootstrap.Collapse.getInstance(collapseFreshEl) || new bootstrap.Collapse(collapseFreshEl, {toggle: false});
+    let bsCollapseDry = bootstrap.Collapse.getInstance(collapseDryEl) || new bootstrap.Collapse(collapseDryEl, {toggle: false});
+
+    for (let category in inventoryData) {
+      let safeId = category.replace(/[^a-zA-Z0-9]/g, '');
+      let subCatCard = document.getElementById('subCatCard_' + safeId);
+      let innerCollapseEl = document.getElementById('inner_' + safeId);
+      let bsInnerCollapse = bootstrap.Collapse.getInstance(innerCollapseEl) || new bootstrap.Collapse(innerCollapseEl, {toggle: false});
+      
+      if (!subCatCard) continue;
+
+      let subCatHasMatches = false;
+      let rows = subCatCard.querySelectorAll('.item-row');
+
+      rows.forEach(row => {
+        let itemName = row.getAttribute('data-item-name');
+        if (query === "") {
+          row.style.display = "flex";
+          row.classList.remove('item-highlight');
+        } else if (itemName.includes(query)) {
+          row.style.display = "flex";
+          row.classList.add('item-highlight');
+          subCatHasMatches = true;
+        } else {
+          row.style.display = "none";
+          row.classList.remove('item-highlight');
+        }
+      });
+
+      let isFresh = FRESH_CATEGORIES.includes(category);
+
+      if (query === "") {
+        subCatCard.style.display = "block";
+        bsInnerCollapse.hide();
+      } else if (subCatHasMatches) {
+        subCatCard.style.display = "block";
+        bsInnerCollapse.show(); 
+        if (isFresh) parentFreshVisible = true;
+        else parentDryVisible = true;
+      } else {
+        subCatCard.style.display = "none";
+        bsInnerCollapse.hide();
+      }
+    }
+
+    if (query === "") {
+      bsCollapseFresh.hide();
+      bsCollapseDry.hide();
+      document.getElementById('parentRoot_Fresh').style.display = "block";
+      document.getElementById('parentRoot_Dry').style.display = "block";
+    } else {
+      if (parentFreshVisible) {
+        document.getElementById('parentRoot_Fresh').style.display = "block";
+        bsCollapseFresh.show();
+      } else {
+        document.getElementById('parentRoot_Fresh').style.display = "none";
+        bsCollapseFresh.hide();
+      }
+
+      if (parentDryVisible) {
+        document.getElementById('parentRoot_Dry').style.display = "block";
+        bsCollapseDry.show();
+      } else {
+        document.getElementById('parentRoot_Dry').style.display = "none";
+        bsCollapseDry.hide();
+      }
     }
   }
 
@@ -283,36 +368,42 @@
     let grandTotal = 0;
 
     for (let category in inventoryData) {
+      let safeId = category.replace(/[^a-zA-Z0-9]/g, '');
+      
       inventoryData[category].forEach((item, index) => {
-        let cleanId = category.replace(/\s+/g, '') + index;
+        let cleanId = safeId + index;
         
         if (item.configType === "By Weight (gm/kg)") {
-          let weightInput = document.getElementById('weight_' + cleanId).value.trim();
+          let kgInput = document.getElementById('kg_' + cleanId).value.trim();
+          let gmInput = document.getElementById('gm_' + cleanId).value.trim();
           
-          if (weightInput !== "") {
-            let weight = parseFloat(weightInput);
-            if (weight > 0) {
-              let unit = document.getElementById('unit_' + cleanId).value;
-              let basePrice = parseFloat(item.price);
-              
-              let multiplier = (unit === "gm") ? (weight / 1000) : weight;
-              let itemTotal = Math.round(basePrice * multiplier);
-              
-              grandTotal += itemTotal;
-              cart.push({
-                name: item.name,
-                rateInfo: ` (₹${basePrice}/${item.baseUnit})`,
-                displayUnit: weight + " " + unit,
-                qty: 1,
-                total: "₹" + itemTotal
-              });
-            }
+          let kgVal = parseFloat(kgInput) || 0;
+          let gmVal = parseFloat(gmInput) || 0;
+          
+          if (kgVal > 0 || gmVal > 0) {
+            let basePrice = parseFloat(item.price);
+            let totalWeightInKg = kgVal + (gmVal / 1000);
+            let itemTotal = basePrice * totalWeightInKg;
+            
+            let unitLabelList = [];
+            if(kgVal > 0) unitLabelList.push(kgVal + " kg");
+            if(gmVal > 0) unitLabelList.push(gmVal + " gm");
+            let finalLabelStr = unitLabelList.join(" ");
+            
+            grandTotal += itemTotal;
+            cart.push({
+              name: item.name,
+              rateInfo: ` (₹${basePrice}/${item.baseUnit})`,
+              displayUnit: finalLabelStr,
+              qty: 1,
+              total: "₹" + currencyFormatter.format(itemTotal)
+            });
           }
         } else {
           let qtyVal = parseInt(document.getElementById('qty_' + cleanId).value);
           if (qtyVal > 0) {
             let basePrice = parseFloat(item.price);
-            let itemTotal = Math.round(basePrice * qtyVal);
+            let itemTotal = basePrice * qtyVal;
             
             grandTotal += itemTotal;
             cart.push({
@@ -320,7 +411,7 @@
               rateInfo: ` (₹${basePrice}/${item.baseUnit})`,
               displayUnit: item.baseUnit,
               qty: qtyVal,
-              total: "₹" + itemTotal
+              total: "₹" + currencyFormatter.format(itemTotal)
             });
           }
         }
@@ -337,7 +428,8 @@
     tbody.innerHTML = '';
     
     cart.forEach(item => {
-      let qtyDisplay = (item.displayUnit.includes("gm") || item.displayUnit.includes("kg")) ? "-" : item.qty;
+      let isWeight = (item.displayUnit.includes("gm") || item.displayUnit.includes("kg"));
+      let qtyDisplay = isWeight ? "-" : item.qty;
       tbody.innerHTML += `
         <tr>
           <td><strong>${item.name}</strong><br><small class="text-muted">${item.rateInfo}</small></td>
@@ -346,7 +438,7 @@
           <td><strong>${item.total}</strong></td>
         </tr>`;
     });
-    document.getElementById('grandTotalDisplay').innerText = '₹' + grandTotal;
+    document.getElementById('grandTotalDisplay').innerText = '₹' + currencyFormatter.format(grandTotal);
 
     switchPage('page2');
   }
